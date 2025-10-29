@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-This SoC development is based on the FemtoRV32 project, which encompasses the RISC-V core known as Quark. The single-cycle microarchitecture of Quark, consisting of fetch, decode, register read, execute, and write-back stages, stands out for its minimalist and compact structure. With the assistance of open-source tools, as OpenLane and Magic. The maximum operating frequency achieved was - MHz. The RISC-V has a modular structure that allows the architecture to be adapted to functional and economic requirements. The base module is a 32-bit integer processor (RV32I) to which modules can be integrated to perform integer multiplication and division (RV32M).
+This SoC development is based on the FemtoRV32 project, which encompasses the RISC-V core known as Quark. The single-cycle microarchitecture of Quark, consisting of fetch, decode, register read, execute, and write-back stages, stands out for its minimalist and compact structure. With the assistance of open-source tools, as OpenLane and Magic. The maximum operating frequency achieved was - MHz. The RISC-V has a modular structure that allows the architecture to be adapted to functional and economic requirements. The base module is a 32-bit integer processor (RV32I) to which modules can be integrated to perform integer multiplication.
 
 ## How to test
 
