@@ -1,7 +1,7 @@
 # Tiny Tapeout project information
 project:
   title:        "Femto"      # Project title
-  author:       "Johan Ruiz"      # Your name
+  author:       "Johan Ruiz Araque"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "This project is dedicated to the full physical implementation of a SoC based on the RISC-V architecture, building on the FemtoRV32 project by Bruno Levy"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
