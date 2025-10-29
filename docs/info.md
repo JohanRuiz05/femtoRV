@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+This SoC development is based on the FemtoRV32 project, which encompasses the RISC-V core known as Quark. The single-cycle microarchitecture of Quark, consisting of fetch, decode, register read, execute, and write-back stages, stands out for its minimalist and compact structure. With the assistance of open-source tools, as OpenLane and Magic. The maximum operating frequency achieved was - MHz. The RISC-V has a modular structure that allows the architecture to be adapted to functional and economic requirements. The base module is a 32-bit integer processor (RV32I) to which modules can be integrated to perform integer multiplication and division (RV32M).
 
 ## How to test
 
-Explain how to use your project
+The project use the open-source tool Xyce to test the analog circuit design of the top module (femto.v), obtained from the SPICE model of the verilog files extracted with Magic. In this way, the signals required to ensure the processor's operation were verified, particularly in terms of the SPI memory and the UART peripheral.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+The project only uses a LED display (output) as external hardware.
