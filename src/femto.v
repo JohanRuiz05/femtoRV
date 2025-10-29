@@ -20,7 +20,7 @@ module tt_um_femto (
 	
 	wire spi_miso = ui_in[0];
 	wire spi_miso_ram = ui_in[1];
-	wire RXD = ui_in[3];
+	wire RXD = ui_in[2];
 	
 	wire spi_mosi;
 	wire spi_cs_n;
@@ -213,11 +213,11 @@ module tt_um_femto (
 
 	`endif
 	
-	assign uo_out = {spi_mosi_ram, spi_cs_n_ram, spi_clk_ram, TXD, LEDS, spi_clk, spi_cs_n, spi_mosi};
+	assign uo_out = {TXD, LEDS, spi_clk, spi_clk_ram, spi_cs_n_ram, spi_cs_n, spi_mosi_ram, spi_mosi};
 	
 	// List all unused inputs to prevent warnings
 	
-	wire _unused = &{ena, uio_oe[7:0], uio_in[7:0], uio_out[7:0], ui_in[7:4], ui_in[2:1], 1'b0};
+	wire _unused = &{ena, uio_oe[7:0], uio_in[7:0], uio_out[7:0], ui_in[7:3], 1'b0};
 
 	assign uio_out = 8'h00;
 	assign uio_oe = 8'h00;
