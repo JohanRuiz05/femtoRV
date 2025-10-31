@@ -17,4 +17,4 @@ The project use the open-source tool Xyce to test the analog circuit design of t
 
 ## External hardware
 
-The project only uses a LED display (output) as external hardware.
+The project only uses one LED display (output) as external hardware.
