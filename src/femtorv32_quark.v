@@ -154,7 +154,7 @@ module FemtoRV32(
 
    wire funct3IsShift = funct3Is[1] | funct3Is[5];
 
-   always @(negedge clk) begin
+   always @(posedge clk) begin
       if (!reset)
         aluShamt <= 0;
       else begin
@@ -371,27 +371,21 @@ module FemtoRV32(
      PC        <= RESET_ADDR[ADDR_WIDTH-1:0];
      rs1       <= 0;
      rs2       <= 0;
-     aluWr     <= 0;
+//     aluWr     <= 0;
      mem_wmask <= 0;
-//     mem_rstrb <= 0;
-//     writeBack <= 0;
 
    end else begin
      case(state)
 
        FETCH_INSTR: begin
-//         mem_rstrb <= 1;
-         aluWr     <= 0;
+//         aluWr     <= 0;
          mem_wmask <= 0;
-//         writeBack <= 0;
          state     <= WAIT_INSTR;    
        end
 
        WAIT_INSTR:begin
-//           mem_rstrb <= 0;
-           aluWr     <= 0;
+//           aluWr     <= 0;
            mem_wmask <= 0;
-//           writeBack <= 0;
            if(!mem_rbusy) begin // may be high when executing from SPI flash
               rs1 <= registerFile[mem_rdata[19:15]];
               rs2 <= registerFile[mem_rdata[24:20]];
@@ -402,10 +396,8 @@ module FemtoRV32(
        end
 
        EXECUTE:begin    
-//         mem_rstrb <= isLoad ;  
-         aluWr     <= isALU;
+//         aluWr     <= isALU;
          mem_wmask <= {4{isStore}} & STORE_wmask; 
-//         writeBack <= ~(isBranch | isStore );
          if(isJALR) begin
            PC <= {aluPlus[ADDR_WIDTH-1:1],1'b0};
          end else begin
@@ -421,19 +413,15 @@ module FemtoRV32(
        end
 
        WAIT_ALU_OR_MEM:begin
-//         mem_rstrb <= 0;
-         aluWr     <= 0;
+//         aluWr     <= 0;
          mem_wmask <= 0;
-//         writeBack <= ~(isBranch | isStore );
          if(!mem_rbusy & !mem_wbusy & !aluBusy )
            state <= FETCH_INSTR;
        end
 
        default:begin
-//         mem_rstrb <= 0;
-         aluWr     <= 0;
+//         aluWr     <= 0;
          mem_wmask <= 0;
-//         writeBack <= 0;
          state     <= WAIT_INSTR;
        end
 
@@ -449,7 +437,7 @@ module FemtoRV32(
 
 always @(*) begin
   if(!reset) begin
-//    aluWr     <= 0;
+    aluWr     <= 0;
 //    mem_wmask <= 0;
     mem_rstrb = 0;
     writeBack = 0;        
@@ -457,28 +445,28 @@ always @(*) begin
     case(state)
       FETCH_INSTR: begin
         mem_rstrb = 1;
-//        aluWr     <= 0;
+        aluWr     <= 0;
 //        mem_wmask <= 0;
         writeBack = 0;
       end
 
       WAIT_INSTR: begin
         mem_rstrb = 0;
-//        aluWr     <= 0;
+        aluWr     <= 0;
 //        mem_wmask <= 0;
         writeBack = 0;
       end
 
       EXECUTE: begin 
         mem_rstrb = isLoad ;  
-//        aluWr     <= isALU;
+        aluWr     <= isALU;
 //        mem_wmask <= {4{isStore}} & STORE_wmask; 
         writeBack = ~(isBranch | isStore );
       end
 
       WAIT_ALU_OR_MEM: begin
         mem_rstrb = 0;
-//        aluWr     <= 0;
+        aluWr     <= 0;
 //        mem_wmask <= 0;
         writeBack = ~(isBranch | isStore );
       end
@@ -553,4 +541,3 @@ end
 endmodule
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
-
