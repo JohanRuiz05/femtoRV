@@ -41,7 +41,7 @@ module tt_um_femto (
 	
 	FemtoRV32 CPU(
       .clk(clk),
-      .reset(resetn),		 
+      .reset(rst_n),		 
       .mem_addr(mem_address),
       .mem_rdata(mem_rdata),
       .mem_rstrb(mem_rstrb),
@@ -59,7 +59,7 @@ module tt_um_femto (
 	
    MappedSPIRAM mapped_spi_ram(
       .clk(clk),
-      .reset(resetn),
+      .reset(rst_n),
       .word_address(mem_address[15:0]),
       .wdata(mem_wdata[31:0]),
       .rd(cs[6] & rd),
@@ -86,7 +86,7 @@ module tt_um_femto (
 
    MappedSPIFlash mapped_spi_flash(
       .clk(clk),
-      .reset(resetn),
+      .reset(rst_n),
       .rstrb(cs[0] & rd),
       .word_address(mem_address[21:2]),
       .rdata(RAM_rdata),
@@ -105,7 +105,7 @@ module tt_um_femto (
      .baud(115200)            // 57600 for gowin
    ) per_uart(
      .clk(clk), 
-     .rst(!resetn), 
+     .rst(!rst_n), 
      .d_in(mem_wdata[7:0]), 
      .cs(cs[5]), 
      .addr(mem_address[4:0]), 
