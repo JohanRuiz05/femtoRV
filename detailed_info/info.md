@@ -2,21 +2,21 @@
 
 A continuación se realiza una descripción del procedimiento llevado a cabo para la implementación del procesador RISC-V FemtoRV, basado en el desarrollo de Bruno Levy, a través de herramientas de diseño VLSI libres y open-source para su posterior envío al proyecto educativo Tiny Tapeout, que permite manufacturar un chip real a partir del desarrollo realizado. El diagrama de bloques del procesador propuesto se observa a continuación.
 
-[PROCESSOR](docs/riscv-Levy.png)
+![PROCESSOR](docs/riscv-Levy.png)
 
 ## Descripción general
 
 Para que el procesador fue implementado inicialmente en Verilog, a través de diferentes módulos que aseguraban su funcionamiento. El módulo principal (top) es femto.v, que instancia la memoria y los diferentes periféricos necesarios. La memoria usaba la interfaz SPI (Serial Peripheral Interface) para la comunicación y contaba tanto con una memoria flash para el sistema (mappedSPIFlash.v), como una memoria RAM para el funcionamiento activo del procesador (mappedSPIRAM.v); mientras que como periféricos se tenía la UART, necesaria para verificar la correcta ejecución de las diferentes tareas en el procesador (uart.v). Adicionalmente, se tenían periféricos de prueba como el multiplicador, divisor, entre otros, que aunque se encuentran entre los archivos src, no fueron utilizados para disminuir el tamaño y complejidad del sistema.
 
-Los archivos en Verilog de la implementación se pueden encontrar en la carpeta [femtoRV/src] (femtoRV/src). 
+Los archivos en Verilog de la implementación se pueden encontrar en la carpeta [femtoRV/src](femtoRV/src). 
 
-Para ver el flujo de diseño original, se puede consultar el GitHub [VLSI] (https://github.com/cicamargoba/VLSI.git), en la carpeta femtoRV/OpenLane. Este contiene el femto.v inicial sin las adaptaciones necesarias para Tiny Tapeout, permitiendo ver de manera clara las entradas y salidas del procesador, así como el funcionamiento completo del sistema.  
+Para ver el flujo de diseño original, se puede consultar el GitHub [VLSI](https://github.com/cicamargoba/VLSI.git), en la carpeta femtoRV/OpenLane. Este contiene el femto.v inicial sin las adaptaciones necesarias para Tiny Tapeout, permitiendo ver de manera clara las entradas y salidas del procesador, así como el funcionamiento completo del sistema.  
 
 ## Herramientas necesarias 
 
 ### Flujo ASIC
 
-Para la instalación de herramientas de flujo ASIC se puede seguir el README disponible en [VLSI] (https://github.com/cicamargoba/VLSI/blob/main/README.md), donde se incluye:
+Para la instalación de herramientas de flujo ASIC se puede seguir el README disponible en [VLSI](https://github.com/cicamargoba/VLSI/blob/main/README.md), donde se incluye:
 
 1. Yosys -> Framework para Síntesis Verilog-RTL
 2. Icarus Verilog -> COmpilador de Verilog para generar netlists 
@@ -54,7 +54,7 @@ Los archivos de salida de OpenPDK pueden no ser leídos al ejecutar Xyce por gua
 
 ## Flujo de trabajo
 
-Para la síntesis del circuito a partir de los archivos en Verilog se usó iverilog, con la que se obtenían los archivos necesarios para la simulación inicial (como el .vcd). Las pruebas previas se realizaron con un Testbench para femto (femto_TB.v) y el uso de GTKWave, con el que se añadían las diferentes señales de interés para verificar su funcionamiento. La carpeta femtoRV en [VLSI] (https://github.com/cicamargoba/VLSI.git) contiene los archivos generados tanto de hardware (.v) como de firmware (.hex), así como plantillas de GTKWave (.gtkw) para el análisis de las señales. 
+Para la síntesis del circuito a partir de los archivos en Verilog se usó iverilog, con la que se obtenían los archivos necesarios para la simulación inicial (como el .vcd). Las pruebas previas se realizaron con un Testbench para femto (femto_TB.v) y el uso de GTKWave, con el que se añadían las diferentes señales de interés para verificar su funcionamiento. La carpeta femtoRV en [VLSI](https://github.com/cicamargoba/VLSI.git) contiene los archivos generados tanto de hardware (.v) como de firmware (.hex), así como plantillas de GTKWave (.gtkw) para el análisis de las señales. 
 
 ### Síntesis
 
@@ -150,13 +150,13 @@ Un ejemplo de lo que debería verse en este paso se muestra en la siguiente imag
 
 ![PROCESSOR](docs/py_example.png)
 
-En el caso de femto, se presentaron problemas durante la simulación debido al tamaño del .spice. En la carpeta /spice de [VLSI] (https://github.com/cicamargoba/VLSI/tree/main/femtoRV/spice) hay otras simulaciones, como mult_4 y mult_32 que funcionan adecuadamente para probar los pasos descritos.
+En el caso de femto, se presentaron problemas durante la simulación debido al tamaño del .spice. En la carpeta /spice de [VLSI](https://github.com/cicamargoba/VLSI/tree/main/femtoRV/spice) hay otras simulaciones, como mult_4 y mult_32 que funcionan adecuadamente para probar los pasos descritos.
 
 ## Tiny Tapeout
 
-Para enviar el procesador diseñado a Tiny Tapeout fue necesario realizar una serie de cambios al código de origen para adaptarlo a los requerimientos de la plataforma, necesarios para su aceptación. El flujo de trabajo era automático desde Github, usando herramientas muy similares a las descritas hasta este paso. La plantilla usada para un diseño con sky se encuentra en [Tiny Tapeout] (https://github.com/TinyTapeout/ttsky-verilog-template), donde se indican también los pasos necesarios para participar en el proyecto.
+Para enviar el procesador diseñado a Tiny Tapeout fue necesario realizar una serie de cambios al código de origen para adaptarlo a los requerimientos de la plataforma, necesarios para su aceptación. El flujo de trabajo era automático desde Github, usando herramientas muy similares a las descritas hasta este paso. La plantilla usada para un diseño con sky se encuentra en [Tiny Tapeout](https://github.com/TinyTapeout/ttsky-verilog-template), donde se indican también los pasos necesarios para participar en el proyecto.
 
-En los archivos de Verilog de origen únicamente se debía adaptar el módulo top, femto.v, que pasaba a ser tt_um_femto.v. El módulo final se puede ver en la carpeta [femtoRV/src] (femtoRV/src). Adicionalmente, se debían establecer explícitamente los parámetros de funcionamiento, archivos source y  pines de entrada y salida en el archivo [info.yaml] (femtoRV/info.yaml) y llenar algunos datos adicionales en [info.md] (femtoRV/docs/info.md). Con este procedimiento, y corrigiendo diferentes errores asociados principalmente a la sintaxis exigida por Tiny Tapeout, se completó el flujo de trabajo exigido para la recepción de trabajos, principalmente la simulación con sky en el proceso gds.
+En los archivos de Verilog de origen únicamente se debía adaptar el módulo top, femto.v, que pasaba a ser tt_um_femto.v. El módulo final se puede ver en la carpeta [femtoRV/src](femtoRV/src). Adicionalmente, se debían establecer explícitamente los parámetros de funcionamiento, archivos source y  pines de entrada y salida en el archivo [info.yaml](femtoRV/info.yaml) y llenar algunos datos adicionales en [info.md](femtoRV/docs/info.md). Con este procedimiento, y corrigiendo diferentes errores asociados principalmente a la sintaxis exigida por Tiny Tapeout, se completó el flujo de trabajo exigido para la recepción de trabajos, principalmente la simulación con sky en el proceso gds.
 
 Se debe mencionar que uno de los pasos requería la adaptación de un testbench del diseño por medio de CocoTB, un framework basado en Python para verificar diseños en HDL, pero no se simuló ninguna salida en este para evitar errores asociados al tiempo de ejecución. El flujo de trabajo automático genera una serie de resultados que podían ser simulados directamente siguiendo un proceso similar al descrito anteriormente, por lo que se prefirió esta forma de verificar que el diseño enviado fuera correcto.
 
