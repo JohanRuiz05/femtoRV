@@ -1,0 +1,44 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Mon Oct 20 12:36:31 2025
+[*]
+[dumpfile] "/home/sebastian/VLSI/femtoRV/spice/femto/femto_TB.vcd"
+[dumpfile_mtime] "Mon Oct 20 12:36:31 2025"
+[dumpfile_size] 3289718784
+[savefile] "/home/sebastian/VLSI/femtoRV/spice/femto/test_femto.gtkw"
+[timestart] 0
+[size] 1854 1001
+[pos] -27 -24
+*-21.700001 3114301000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] femto_TB.
+[treeopen] femto_TB.uut.
+[sst_width] 278
+[signals_width] 438
+[sst_expanded] 1
+[sst_vpaned_height] 645
+@28
+femto_TB.uut.clk
+femto_TB.uut.resetn
+femto_TB.uut.\CPU.mem_rstrb
+[color] 2
+femto_TB.uut.spi_miso
+@800022
+#{PC} femto_TB.uut.\CPU.PC[23] femto_TB.uut.\CPU.PC[22] femto_TB.uut.\CPU.PC[21] femto_TB.uut.\CPU.PC[20] femto_TB.uut.\CPU.PC[19] femto_TB.uut.\CPU.PC[18] femto_TB.uut.\CPU.PC[17] femto_TB.uut.\CPU.PC[16] femto_TB.uut.\CPU.PC[15] femto_TB.uut.\CPU.PC[14] femto_TB.uut.\CPU.PC[13] femto_TB.uut.\CPU.PC[12] femto_TB.uut.\CPU.PC[11] femto_TB.uut.\CPU.PC[10] femto_TB.uut.\CPU.PC[9] femto_TB.uut.\CPU.PC[8] femto_TB.uut.\CPU.PC[7] femto_TB.uut.\CPU.PC[6] femto_TB.uut.\CPU.PC[5] femto_TB.uut.\CPU.PC[4] femto_TB.uut.\CPU.PC[3] femto_TB.uut.\CPU.PC[2] femto_TB.uut.\CPU.PC[1]
+@800200
+-femto_TB.uut.\RAM.MEM[15][31:0]
+@200
+-
+@800200
+-femto_TB.uut.\RAM_rdata[31:0]
+@28
+femto_TB.uut.spi_miso_ram
+@200
+-
+-
+-
+@1001200
+-group_end
+-group_end
+-group_end
+[pattern_trace] 1
+[pattern_trace] 0
