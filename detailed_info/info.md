@@ -106,7 +106,7 @@ Para el siguiente paso, se creó la carpeta /spice en femtoRV, y dentro de esta 
 
 Con lo anterior, es necesario abrir el archivo de GTKWave y ubicar las señales de interés para la simulación en la pestaña de formas de onda. En el caso de /femto, se tenían cuatro señales necesarias: clk (clock del sistema), resetn (reset del sistema), spi_miso y spi_miso_ram (interfaces master input slave output). Para otros diseños pueden añadirse las necesarias. Una vez definidas, se elige la opción File -> Export -> Write TIM File as y se le da un nombre al archivo .tim, como se ve a continuación.
 
-![PROCESSOR](img/tim_export.png)
+![TIM](img/tim_export.png)
 
 El resultado de este paso es un archivo .tim a partir del cual se puede generar el archivo .cir que recibe como entrada NGSpice o Xyce, y que contiene una representación de las señales a simular. Para la conversión se creó un script de Python (tim_to_pwl.py) que se encargaba de pasar los datos de .tim al formato .cir sin alterar los nombres de las señales y definiendo un epsilon para los cambios de estado de las señales. El parámetro epsilon era esencial para asegurar el funcionamiento del paso, ya que tiempos muy cortos (inferiores a 1e-09) ocasionaban errores en Xyce. Este parámetro, por lo tanto, es editable. El comando para ejecutar el script, asumiendo que está ubicado en femtoRV/spice (una carpeta antes), es:
 
@@ -116,7 +116,7 @@ python3 ../tim_to_pwl.py <tim filename>
 
 La ejecución del script generaba un .cir del mismo nombre con las señales exportadas de GTKWave. El ejemplo para /femto se ve a continuación, donde se destacan como parámetros importantes el tiempo de simulación (.tran), que aumenta o reduce los recursos necesarios para la simulación, el llamado a las librerías SPICE de sky130 y el include del archivo .spice generado en el anterior paso.
 
-![PROCESSOR](img/cir_example.png)
+![CIR](img/cir_example.png)
 
 Así, se completaban los archivos necesarios para la simulación. Se tenían dos opciones para correrlo, con sus comandos correspondientes:
 
@@ -148,7 +148,7 @@ pip install ltspice #Solo se ejecuta una vez para instalar LTSpice, si ya se rea
 
 Un ejemplo de lo que debería verse en este paso se muestra en la siguiente imagen:
 
-![PROCESSOR](img/py_example.png)
+![PY_PLOT](img/py_example.png)
 
 En el caso de femto, se presentaron problemas durante la simulación debido al tamaño del .spice. En la carpeta /spice de [VLSI](https://github.com/cicamargoba/VLSI/tree/main/femtoRV/spice) hay otras simulaciones, como mult_4 y mult_32 que funcionan adecuadamente para probar los pasos descritos.
 
