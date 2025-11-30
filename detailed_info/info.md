@@ -2,7 +2,7 @@
 
 A continuación se realiza una descripción del procedimiento llevado a cabo para la implementación del procesador RISC-V FemtoRV, basado en el desarrollo de Bruno Levy, a través de herramientas de diseño VLSI libres y open-source para su posterior envío al proyecto educativo Tiny Tapeout, que permite manufacturar un chip real a partir del desarrollo realizado. El diagrama de bloques del procesador propuesto se observa a continuación.
 
-![PROCESSOR](../img/riscv-Levy.png)
+![PROCESSOR](img/riscv-Levy.png)
 
 ## Descripción general
 
