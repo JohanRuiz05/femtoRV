@@ -173,7 +173,7 @@ Una vez que concluyen las acciones y todas son aceptadas, es posible remitirse a
 
 Seleccionando la última ejecución exitosa, se abre el resumen del proceso realizado (gds summary), el cual se puede consultar para mayor información del uso de recursos para las condiciones establecidas de diseño (uso de celdas, utilización de tutas, warnings, procesos de precheck, entre otros). La última sección, llamada Artifacts, contiene los resultados finales, permitiendo su descarga para el análisis. La simulación se realizó con la carpeta de salida tt_submissions, como se puede ver.
 
-![RESULTS](img/tt_submisions.png)
+![SUBMISSION](img/tt_submisions.png)
 
 La carpeta descargada (puede ser necesario descomprimirla) contiene los archivos src del diseño, así como una subcarpeta llamada tt_submission, donde se encuentra:
 
