@@ -54,11 +54,11 @@ Los archivos de salida de OpenPDK pueden no ser leídos al ejecutar Xyce por gua
 
 ## Flujo de trabajo
 
-Para la síntesis del circuito a partir de los archivos en Verilog se usó iverilog, con la que se obtenían los archivos necesarios para la simulación inicial (como el .vcd). Las pruebas previas se realizaron con un Testbench para femto (femto_TB.v) y el uso de GTKWave, con el que se añadían las diferentes señales de interés para verificar su funcionamiento. La carpeta femtoRV en [VLSI](https://github.com/cicamargoba/VLSI.git) contiene los archivos generados tanto de hardware (.v) como de firmware (.hex), así como plantillas de GTKWave (.gtkw) para el análisis de las señales. 
+Para la síntesis del circuito a partir de los archivos en Verilog se usó iverilog, con la que se obtenían los archivos necesarios para la simulación inicial (como el .vcd). Las pruebas previas se realizaron con un Testbench para femto (femto_TB.v) y el uso de GTKWave, con el que se añadían las diferentes señales de interés para verificar su funcionamiento. La carpeta femtoRV en [VLSI](https://github.com/cicamargoba/VLSI.git) contiene los archivos generados tanto de hardware (.v) como de firmware (.hex), así como plantillas de GTKWave (.gtkw) para el análisis de las señales. La versión final con los archivos usados en simulación se encuentra en el respositorio [femto](https://github.com/JohanRuiz05/femto), con organización similar a VLSI.
 
 ### Síntesis
 
-El flujo de diseño inicial se realiza a partir de OpenLane, que genera los resultados que se usaron para los pasos descritos. OpenLane toma los archivos disponibles en femtoRV/OpenLane, incluyendo los archivos fuente descritos, y automatiza el flujo, generando las carpetas final, floorplan, placement, routing y synthesis en una carpeta llamada femtoRV/OpenLane/designs/.../runs/full/results (... es el nombre dado en el comando, como se verá a continuación), donde se encuentran los archivos necesarios para los pasos posteriores. El comando a ejecutar dentro de la carpeta es:
+El flujo de diseño inicial se realiza a partir de OpenLane, que genera los resultados que se usaron para los pasos descritos. OpenLane toma los archivos disponibles en [femtoRV/OpenLane](https://github.com/cicamargoba/VLSI/tree/main/femtoRV/OpenLane), incluyendo los archivos fuente descritos, y automatiza el flujo, generando las carpetas final, floorplan, placement, routing y synthesis en una carpeta llamada femtoRV/OpenLane/designs/.../runs/full/results (... es el nombre dado en el comando, como se verá a continuación), donde se encuentran los archivos necesarios para los pasos posteriores. El comando a ejecutar dentro de la carpeta es:
 
 ```bash
 make mount
@@ -99,7 +99,7 @@ El resultado del anterior proceso es un archivo .spice que puede ser usado para 
 
 ### Simulación del diseño
 
-Para el siguiente paso, se creó la carpeta /spice en femtoRV, y dentro de esta una subcarpeta con el nombre del diseño (femtoRV/spice/femto). En esta se ubicó el archivo .spice generado, junto con los archivos generados con iverilog. Es importante mencionar que el flujo requiere varios archivos de sky_130 para funcionar, por lo que es necesario que estén incluidos en la carpeta de origen o que se apunte a ellos. Estos son:
+Desde este únto se remitirá al respositorio [femto](https://github.com/JohanRuiz05/femto) para los archivos finales. Para el siguiente paso, se creó la carpeta /spice en femto, y dentro de esta una subcarpeta con el nombre del diseño (femtoRV/spice/femto). En esta se ubicó el archivo .spice generado, junto con los archivos generados con iverilog. Es importante mencionar que el flujo requiere varios archivos de sky_130 para funcionar, por lo que es necesario que estén incluidos en la carpeta de origen o que se apunte a ellos. Estos son:
 
 - sky130_fd_sc_hd.v
 - primitives.v
@@ -150,7 +150,7 @@ Un ejemplo de lo que debería verse en este paso se muestra en la siguiente imag
 
 ![PY_PLOT](img/py_example.png)
 
-En el caso de femto, se presentaron problemas durante la simulación debido al tamaño del .spice. En la carpeta /spice de [VLSI](https://github.com/cicamargoba/VLSI/tree/main/femtoRV/spice) hay otras simulaciones, como mult_4 y mult_32 que funcionan adecuadamente para probar los pasos descritos.
+En el caso de femto, se presentaron problemas durante la simulación debido al tamaño del .spice. En la carpeta /spice de [femto](https://github.com/JohanRuiz05/femto/tree/main/spice) hay otras simulaciones, como mult_4 y mult_32 que funcionan adecuadamente para probar los pasos descritos.
 
 ## Tiny Tapeout
 
@@ -161,3 +161,5 @@ En los archivos de Verilog de origen únicamente se debía adaptar el módulo to
 Se debe mencionar que uno de los pasos requería la adaptación de un testbench del diseño por medio de CocoTB, un framework basado en Python para verificar diseños en HDL, pero no se simuló ninguna salida en este para evitar errores asociados al tiempo de ejecución. El flujo de trabajo automático genera una serie de resultados que podían ser simulados directamente siguiendo un proceso similar al descrito anteriormente, por lo que se prefirió esta forma de verificar que el diseño enviado fuera correcto.
 
 ### Simulación de resultados de Tiny Tapeout
+
+
