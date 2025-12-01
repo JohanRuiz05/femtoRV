@@ -76,9 +76,7 @@ Donde design name es el nombre que se quiera dar al proyecto, se usará como eje
 Entre los archivos de salida en ../results, se puede destacar el .mag que contiene la carpeta ../results/final, que corresponde a la salida en Magic del circuito, el diagrama de compuertas del place and route. Al ser una representación física, es necesario convertirla a un formato que permita simularlo como es el caso de SPICE, lo que es posible dentro de la consola de Magic, ejecutando los comandos:
 
 ```bash
-# Extract the circuit from the layout design.
 extract all
-# Convert the extracted circuit to SPICE model.
 ext2spice cthresh 0 rthresh 0
 ext2spice
 ```
@@ -183,4 +181,20 @@ La carpeta descargada (puede ser necesario descomprimirla) contiene los archivos
 - tt_um_femto.oas
 - tt_um_femto.v
 
-A partir de los cuales es posible obtener el archivo .spice recordando los comandos descritos para la extracción de Magic (Manejo de Magic). El archivo resultante permite repetir los pasos descritos durante la simulación del diseño, ubicando todo en una carpeta llamada tt_um_femto dentro de femtoRV/spice.
+A partir de los cuales es posible obtener el archivo .spice recordando los comandos descritos para la extracción de Magic (Manejo de Magic) usando el archivo tt_um_femto.gds, pero indicando de manera explícita el path de trabajo para Magic con:
+
+```bash
+export PDK_ROOT=/usr/local/share/pdk/
+export PDK=sky130A
+magic -T $PDK_ROOT/sky130A/libs.tech/magic/sky130A.tech tt_um_femto.gds
+```
+
+Posteriormente, se configura la extracción solo de dispositivos (sin parásitos), siguiendo los pasos de la sección de Manejo de Magic. El archivo resultante permite repetir los pasos descritos durante la simulación del diseño, ubicando todo en una carpeta llamada tt_um_femto dentro de femtoRV/spice; pero también se generan una serie de archivos .ext durante la extracción, estos no se emplearon. 
+
+Repitiendo los pasos del procedimiento Simulación de diseño, se genera la simulación en GTKWave y se obtiene el archivo .tim, que posteriormente se convierte a .cir con el script de Python (2_tim_to_pwl). Adicionalmente, se adaptan los archivos Makefile y pLot.py para tt_um_femto, alcanzando los resultados ya descritos, y se realiza la compilación con iverilog. Los archivos finales de este proceso se encuentran en [femto](). El archivo de formas de onda resultante (a partir del .vcd generado) en GTKWave se observa a continuación, correspondiente al archivo tt_um_femto_sim_1.gtk.
+
+![RESULTSF](img/resultsFemto.png)
+
+Obteniendo la simulación de tiempo funcional. Los pasos siguientes (con Xyce o Ngspice) no pudieron ser replicados por la complejidad del circuito extraído, lo que impidió una simulación a nivel físico de la implementación de femto. SIn embargo, para comprobar que el proceso se había realizado de manera correcta, se repitió el proceso completo (implementación, simulación del diseño y prueba con Tiny Tapeout) ára un archivo ya comprobado de menor complejidad, un multiplicador de 4 bits. 
+
+
