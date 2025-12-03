@@ -197,4 +197,43 @@ Repitiendo los pasos del procedimiento Simulación de diseño, se genera la simu
 
 Obteniendo la simulación de tiempo funcional. Los pasos siguientes (con Xyce o Ngspice) no pudieron ser replicados por la complejidad del circuito extraído, lo que impidió una simulación a nivel físico de la implementación de femto. SIn embargo, para comprobar que el proceso se había realizado de manera correcta, se repitió el proceso completo (implementación, simulación del diseño y prueba con Tiny Tapeout) ára un archivo ya comprobado de menor complejidad, un multiplicador de 4 bits. 
 
+### Multiplicador de 4_bits
+
+CAmbio exportación MAgic
+
+Extracción
+
+```bash
+gds noduplicates
+gds readonly true
+extract do local
+extract all
+```
+
+Creación .spice
+
+```bash
+ext2spice lvs
+ext2spice cthresh infinite
+ext2spice rthresh infinite
+ext2spice subcircuit off
+ext2spice hierarchy off
+ext2spice scale off
+ext2spice
+```
+
+Cambiar nombres de señales en el .cir a partir del .tim (a uio_in[0] por ejemplo) con el TB que tenía de antes, solo se necesita para generar los flancos. 
+Copiar el .spice dentro del .cir, no incluir. 
+
+Verificar los nombres de señales desde Python. 
+
+Tardó 35 minutos simulando. 
+
+Tiempo de simulación corto (hasta 2 us) para que concuerde con lo que se hizo en el TIM. 
+
+LOs archivos de salida y eso eran los del tinytapeout, menos el TB que era de antes para facilitar el manejo. Por eso tocaba cambiar las señales del .cir antes de simular.
+
+Editar el plot de python. 
+
+Las señales de salida se instancian como en GTKWave llamándolas. La señal debe ser igual.
 
